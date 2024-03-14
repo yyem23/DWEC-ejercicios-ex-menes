@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ejercicio 1</title>
+</head>
+<body>
+
+    <button id="boton1">Boton 1</button>
+    <button id="boton2">Boton 2</button>
+    <button id="boton3">Boton 3</button>
+    <br><br>
+    <input type="text" id="resultado" readonly>
+
+<script>
+
+    //utilizamos el adeventListener3
+    //utilizamos el color azul
+    document.getElementById('boton1').addEventListener('click', function() {
+        document.getElementById('resultado').value = this.innerText;
+        document.getElementById('resultado').style.color = 'blue';
+    });
+
+      //utilizamos el adeventListener2
+      //utiliamos el color rojo
+    document.getElementById('boton2').addEventListener('click', function() {
+        document.getElementById('resultado').value = this.innerText;
+        document.getElementById('resultado').style.color = 'red';
+    });
+      //utilizamos el adeventListener
+      //utilizamos el color verde
+    document.getElementById('boton3').addEventListener('click', function() {
+        document.getElementById('resultado').value = this.innerText;
+        document.getElementById('resultado').style.color = 'green';
+    });
+</script>
+</body>
+</html>

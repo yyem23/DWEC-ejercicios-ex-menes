@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ejercicio 3</title>
+</head>
+<body>
+
+<p>Repositorios de github
+<input type="text" id="usuario" placeholder="introduce un nombre de repositorio">
+<button id="btn">Buscar</button> </p>
+
+<ul id="resultado"></ul>
+
+<script>
+  //utilizamos el addeventListener
+
+document.getElementById('btn').addEventListener('click', buscarRepositorios);
+
+function buscarRepositorios() {
+  var usuario = document.getElementById('usuario').value; 
+  var url = `https://api.github.com/users/${usuario}/repos`; 
+
+  //utilizamos el fetch
+  fetch(url) 
+    .then(response => {
+      return response.json();
+    })
+    .then(data => {
+      mostrarRepositorios(data); 
+    })
+    .catch(error => {
+      alert('usuario no encontrado, intentalo de nuevo');
+    });  //si pasa algo lo capturamos con un error
+}
+
+//con esta funcion mostramos los repos
+function mostrarRepositorios(repos) { 
+  console.log(repos);
+  var resultadoUl = document.getElementById('resultado');
+  resultadoUl.innerHTML = ''; 
+  repos.forEach(repo => { 
+    var repoItem = document.createElement('li');
+    var repoLink = document.createElement('a');
+    repoLink.textContent = repo.name;
+    repoLink.href = repo.html_url;
+    repoLink.addEventListener('click', function(event) {
+      window.open(repo.html_url, '_blank'); 
+      event.preventDefault(); 
+
+    });
+    repoItem.appendChild(repoLink);
+    resultadoUl.appendChild(repoItem);
+  });
+}
+
+</script>
+
+</body>
+</html>

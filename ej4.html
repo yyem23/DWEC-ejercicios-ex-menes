@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 4</title>
+</head>
+<body>
+
+    <script>
+
+        //comenzamos con una funcion para obtener los numeros aleatorios
+        function OnumAleatorio() {
+         return Math.floor(Math.random() * 6) + 1;
+      }
+
+      //con esta funcion solicitamos el numero
+function solicitarNumero() {
+    //creamos una nueva promesa
+    return new Promise((resolve) => {
+        let numeroUsuario;
+        do {
+            numeroUsuario = parseInt(prompt("introduce un numero del 1 al 6:"));
+        } while (isNaN(numeroUsuario) || numeroUsuario < 1 || numeroUsuario > 6);
+        resolve(numeroUsuario);
+    });
+}
+
+//creamos una funcion para jugar 
+function jugar() {
+    return new Promise(async (resolve) => {
+        const numeroUsuario = await solicitarNumero();
+        const numeroAleatorio = OnumAleatorio();
+        let puntos = 0;
+
+        if (numeroUsuario === numeroAleatorio) {
+            puntos = 2;
+        } else if (Math.abs(numeroUsuario - numeroAleatorio) === 1) {
+            puntos = 1;
+        }
+
+        resolve(puntos);
+    });
+}
+
+//utilizamos una funcion asincrona para iniciar el juego
+async function empezarJuego() {
+    let totalPuntos = 0;
+
+    do {
+        const puntosRonda = await jugar();
+        totalPuntos += puntosRonda;
+
+        const continuar = confirm(`Puntos acumulados: ${totalPuntos}\n¿Quieres empezar otra ronda?`);
+        if (!continuar) {
+            break;
+        }
+    } while (true);
+
+    alert(`ha acabado el juego. Puntos totales: ${totalPuntos}`);
+}
+
+// iniciamos el juego al cargar la página (puedes cambiar esto según tus necesidades)
+empezarJuego();
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ejercicio 2</title>
+</head>
+<body>
+<div>
+    <button id="anadirElemento">Agregar elemento</button>
+    <ul id="list"></ul>
+</div>
+
+<script>
+    //utilizamos el addeventListener para agregar los elementos
+    document.getElementById('anadirElemento').addEventListener('click', function() {
+        var textoValido = prompt("introduce un elemento:");
+        //
+        if (textoValido !== null && textoValido.trim() !== '') {
+            var item = document.createElement('li');
+            item.textContent = textoValido;
+            document.getElementById('list').appendChild(item);
+        } else {
+            //mensaje de error
+            alert('introduce un valor valido');
+        }
+    });
+</script>
+</body>
+</html>
